@@ -1,8 +1,6 @@
 const nodemailer = require("nodemailer")
-const welcomeEmailBody = require('./welcome-email-body')
 
-
-const sendEmail = async () =>  {
+const sendEmail = async (emailContent) =>  {
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
   let testAccount = await nodemailer.createTestAccount()
@@ -19,7 +17,7 @@ const sendEmail = async () =>  {
   })
 
   // send mail with defined transport object
-  let info = await transporter.sendMail(welcomeEmailBody)
+  let info = await transporter.sendMail(emailContent)
 
   console.log("Message sent: %s", info.messageId)
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
