@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@azure/service-bus": "^7.7.1",
     "dotenv": "^16.0.3",
     "nodemailer": "^6.7.8"
   }
