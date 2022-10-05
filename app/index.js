@@ -1,7 +1,4 @@
 require('dotenv').config()
-
-const sendEmail = require('./email/send-email')
-const welcomeEmailBody = require('./email/welcome-email-body')
 const { receiveMessage } = require('./messaging/receive-message')
 
 module.exports = (async () => {
