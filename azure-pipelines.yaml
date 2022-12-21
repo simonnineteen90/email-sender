@@ -5,10 +5,10 @@ resources:
   repositories:
   - repository: templates
     type: github
-    endpoint: Simon Dunn
+    endpoint: simonnineteen90
     name: simonnineteen90/azure-pipeline-template
 
 extends:
-  template: /docker-build-push.yaml
+  template: docker-build-push.yaml@templates
   parameters:
     dockerRepo: 'email-sender'
