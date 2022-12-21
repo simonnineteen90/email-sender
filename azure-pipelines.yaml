@@ -1,7 +1,14 @@
 trigger:
   - none
 
+resources:
+  repositories:
+  - repository: templates
+    type: github
+    endpoint: Simon Dunn
+    name: simonnineteen90/azure-pipeline-template
+
 extends:
-  template: simondunn/docker-build-push.yaml
+  template: /docker-build-push.yaml
   parameters:
     dockerRepo: 'email-sender'
