@@ -1,0 +1,7 @@
+trigger:
+  - none
+
+extends:
+  template: docker-build-push.yaml
+  parameters:
+    dockerRepo: 'email-sender'
