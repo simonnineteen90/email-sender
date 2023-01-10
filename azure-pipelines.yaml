@@ -8,4 +8,4 @@ resources:
 extends:
   template: docker-build-push.yaml@templates
   parameters:
-    dockerRepo: 'email-sender'
+    dockerRepo: 'simondunn/email-sender'
