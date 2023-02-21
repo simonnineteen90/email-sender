@@ -19,4 +19,15 @@ spec:
         ports:
         - name: {{ .Values.service.name | default .Chart.Name }}
           containerPort: {{ .Values.containers.containerPort }}
+        env:
+        - name: CONNECTION_STRING
+          value: {{ .Values.env.connectionString }}
+        - name: TOPIC_NAME
+          value: {{ .Values.env.topicName }}
+        - name: SUBSCRIPTION_NAME
+          value: {{ .Values.env.subscriptionName }}
+        - name: EMAIL_ADDRESS
+          value: {{ .Values.env.emailAddress }}
+        - name: EMAIL_PASSWORD
+          value: {{ .Values.env.emailPassword }}
 

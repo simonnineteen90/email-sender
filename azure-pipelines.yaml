@@ -1,11 +1,53 @@
-resources:
-  repositories:
-  - repository: templates
-    type: github
-    endpoint: simonnineteen90
-    name: simonnineteen90/azure-pipeline-template
+variables:
+- group: ec-frontend
 
-extends:
-  template: docker-build-push.yaml@templates
-  parameters:
-    dockerRepo: 'simondunn/email-sender'
+trigger: # will build on any PR
+- main
+
+pr: none
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Docker@2
+  inputs:
+    containerRegistry: 'docker hub'
+    repository: 'simondunn/email-sender'
+    command: 'buildAndPush'
+    Dockerfile: 'Dockerfile'
+    tags: |
+      $(Build.BuildId)
+      latest
+
+- task: HelmInstaller@0
+  inputs:
+    helmVersion: '3.10.3'
+    installKubectl: true
+
+- task: HelmDeploy@0
+  inputs:
+    connectionType: 'Azure Resource Manager'
+    azureSubscription: 'kubernetes'
+    azureResourceGroup: 'kubernetes'
+    kubernetesCluster: 'simonsCluster2'
+    namespace: 'default'
+    command: 'upgrade'
+    chartType: 'FilePath'
+    chartPath: 'helm/email-sender'
+    releaseName: 'ec-sender'
+    arguments: --set containers.tag=$(Build.BuildId),env.connectionString=$(ecConString),env.topicName=$(ecTopicName),env.subscriptionName=$(ecSubName),env.emailAddress=$(ecEmailAddress),env.emailPw=$(ecEmailPw)
+
+
+
+# resources:
+#   repositories:
+#   - repository: templates
+#     type: github
+#     endpoint: simonnineteen90
+#     name: simonnineteen90/azure-pipeline-template
+
+# extends:
+#   template: docker-build-push.yaml@templates
+#   parameters:
+#     dockerRepo: 'simondunn/email-sender'
