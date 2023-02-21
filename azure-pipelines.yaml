@@ -36,7 +36,7 @@ steps:
     chartType: 'FilePath'
     chartPath: 'helm/email-sender'
     releaseName: 'ec-sender'
-    arguments: --set containers.tag=$(Build.BuildId),env.connectionString=$(ecConString),env.topicName=$(ecTopicName),env.subscriptionName=$(ecSubName),env.emailAddress=$(ecEmailAddress),env.emailPw=$(ecEmailPw)
+    arguments: --set containers.tag=$(Build.BuildId),env.connectionString=$(ecConString),env.topicName=$(ecTopicName),env.subscriptionName=$(ecSubName),env.emailAddress=$(ecEmailAddress),env.emailPassword=$(ecEmailPassword)
 
 
 
